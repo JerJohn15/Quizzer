@@ -1,1 +1,166 @@
-<h2>CS473 PlaceHolder</h2>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+		<script type="text/javascript">
+			var qcount = 0;
+			var acount = 0;
+			$(document).ready(function()
+			{
+				$("#submit").on("click", function(e)
+				{
+					var count = 0;
+					var html = '';
+
+					while (count < qcount)
+					{
+						var question;
+						var answer;
+						var type;
+						if ($("th[name=mc" + count + "]").attr('id') == 'mc')
+						{
+							question = $("textarea[name=q" + count + "]").val();
+							answer = $("textarea[name=choices" + count + "]").val();
+							type = $("th[name=mc" + count + "]").attr('id');
+						} 
+						else if($ ("th[name=fb" + count + "]").attr('id') == 'fb')
+						{
+							question = $("textarea[name=q" + count + "]").val();
+							answer = $("input[name=a" + count + "]").val();
+							type = $("th[name=fb" + count + "]").attr('id');
+						}
+						else if ($("th[name=tf" + count + "]").attr('id') == 'tf')
+						{
+							question = $("textarea[name=q" + count + "]").val();
+							answer = $("input[name=a" + count + "]:checked").val();
+							type = $("th[name=tf" + count + "]").attr('id');
+						}
+
+						/* 
+						 *  INSERT TO SQL DATABASE GOES HERE
+						 */
+
+						html += (formatQuestion(question, answer, type));
+
+						count++;
+					}
+
+					$("#answers").html(html);
+
+				});
+
+				$("#addMultiple").on("click", function(e)
+				{
+					$("#buttons").before(getMC());
+				});
+
+				$("#addFill").on("click", function(e)
+				{
+					$("#buttons").before(getFB());
+				});
+
+				$("#addTF").on("click", function(e)
+				{
+					$("#buttons").before(getTF());
+				});
+			});
+
+			function getMC()
+			{
+				var q = '';
+
+				q += "<tr><th name=\"mc" + qcount + "\" id=\"mc\">Multiple Choice</th></tr>";
+				q += "<tr><td>Question: </td><td><textarea name=\"q" + qcount + "\"\"/></textarea></td></tr>";
+				q += "<tr><td>Answers: </td><td><textarea name=\"choices" + qcount + "\"></textarea></td></tr>";
+
+				qcount++;
+				return q;
+			}
+
+			function getFB()
+			{
+				var q = '';
+
+				q += "<tr><th name=\"fb" + qcount + "\" id=\"fb\">Fill in the Blank</th></tr>";
+				q += "<tr><td>Question: </td><td><textarea name=\"q" + qcount + "\"/></textarea></td></tr>";
+				q += "<tr><td>Answer: </td><td><input type=\"text\" name=\"a" + qcount + "\"></td></tr>"
+
+				qcount++;
+				return q;
+			}
+
+			function getTF()
+			{
+				var q = '';
+
+				q += "<tr><th name=\"tf" + qcount + "\" id=\"tf\">True/False</th></tr>";
+				q += "<tr><td>Question: </td><td><textarea name=\"q" + qcount + "\"\"/></textarea></td></tr>";
+				q += "<tr><td>Answer: </td><td><input type=\"radio\" name=\"a" + qcount + "\" value=\"true\">TRUE</td></tr>"
+				q += "<tr><td></td><td><input type=\"radio\" name=\"a" + qcount + "\" value=\"false\">FALSE</td></tr>"
+
+				qcount++;
+				return q;
+			}
+
+			function formatQuestion(q, a, type){
+				html = '';
+
+				if (type == 'mc')
+				{
+					html += "<div>"
+					html +=	"<h4 name=\"mc" + acount + "\" id=\"mc\">" + q + "</h4>"
+					
+					aSplit = a.split("\n");	
+					for(var x in aSplit){
+						console.log(aSplit[x]);
+						if (replaceAll(" ", "", aSplit[x]) != ""){
+							html += "<input type=\"radio\" name=\"a" + acount + "\" value=\"" + replaceAll(" ", "", aSplit[x]) + "\">" + replaceAll(" ", "", aSplit[x]) + "<br>"
+						}
+					}
+
+					html += "</div>"	
+
+				} 
+				else if(type == 'fb')
+				{
+
+					html += "<div>"
+					html +=	"<h4 name=\"fb" + acount + "\" id=\"fb\">" + replaceAll("_", "<input type=\"text\" name=\"a" + qcount + "\">", q); + "</h4>"
+					html += "</div>"
+				}
+				else if (type == 'tf')
+				{
+					html += "<div>"
+					html +=	"<h4 name=\"mc" + acount + "\" id=\"mc\">" + q + "</h4>"
+					html += "<input type=\"radio\" name=\"a" + qcount + "\" value=\"true\">TRUE"
+					html += "<br>"
+					html += "<input type=\"radio\" name=\"a" + qcount + "\" value=\"false\">FALSE"
+					html += "</div>"
+				}
+
+				acount++;
+				console.log(html);
+				return html;
+			}
+
+			function replaceAll(find, replace, str) {
+				return str.replace(new RegExp(find, 'g'), replace);
+			}
+		</script>
+	</head>
+	<body>
+		<h2>CS473 EX - Quiz</h2>
+		<div id="answers">
+			<table id="table">
+				<tr id="buttons">
+					<td><input type="button" id="submit" value="Done"/></td>
+					<td><input type="button" id="addMultiple" value="Add Multiple Choice"/></td>
+					<td><input type="button" id="addFill" value="Add Fill in the Blank"/></td>
+					<td><input type="button" id="addTF" value="Add True/False"/></td>
+				</tr>
+			</table>
+		</div>
+		<div id = "done">
+		</div>
+	</body>
+</html>
