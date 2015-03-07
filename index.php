@@ -67,9 +67,10 @@ if (!isset($_SESSION['user'])) {
 	     </p>
         </div>
 	<p>
-
+	</p>
+	<a href="logout.php">Logout</a>
+	</p>	
 <?php
-	include 'quiz.html';
-
 }
-include 'footer.php';
+	include 'quiz.html';
+	include 'footer.php';
