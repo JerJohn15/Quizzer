@@ -52,8 +52,7 @@ if (!isset($_SESSION['user'])) {
 		</ul>
              </div>
 
-             <div id="create_account">
-		<a href="javascript:void(0);" class="fortune_button" onClick="makePopUp('create_account.php','Create Account');return false;">Create Account</a>
+             <div id="create_account"><a href="create_account.php" target="_new">Create Account</a>
 	     </div>
         </div>
 
@@ -75,8 +74,6 @@ if (!isset($_SESSION['user'])) {
 	<div class="login-auth">
              <div class="account_text"><span class="account_header">User:</span> <?php echo $_SESSION['user']; ?><p></div><p>
              <div class="account_text"><span class="account_header">Name:</span> <?php echo $_SESSION['name']; ?><p></div><p>
-	     <button id="fortuneShow" class="fortune_button">ADD FORTUNE</button>
-             <a class="fortune_button" href="logout.php">LOGOUT</a>
 	     </p>
         </div>
 	<p>

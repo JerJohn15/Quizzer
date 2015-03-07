@@ -29,6 +29,11 @@ include 'header.php';
                 <span id="passwd-result"></span>
             </label>
 
+            <label for="role">
+                <input type="radio" name="role" value="user"/>User</input>
+                <input type="radio" name="role" value="admin"/>Admin</input>
+            </label>
+
             <p/>
 
             <button class="fortune_button" type="submit" name="login_button">CREATE</button>
