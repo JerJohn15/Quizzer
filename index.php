@@ -36,19 +36,51 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 // Check for an established session
 if (!isset($_SESSION['user'])) {
-?>
+    ?>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<div id="login-unauth">
+       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+       <div id="login-unauth">
 
-    <form action="index.php" method="post" class="user_login">
-        <ul>
-            <li><input class="login" name="user" type="email" placeholder="you@domain.com" required></li>
-            <li><input class="login" name="passwd" type="password" placeholder="password" required></li>
-        </ul>
-        <ul>
-            <li><button class="fortune_button" type="submit" name="login_button">LOGIN</button></li>
-            <li><?=$failed_login?></li>
-        </ul>
-</div>
-</div>
+             <form action="index.php" method="post" class="user_login">
+                <ul>
+  		   <li><input class="login" name="user" type="email" placeholder="you@domain.com" required></li>
+		   <li><input class="login" name="passwd" type="password" placeholder="password" required></li>
+		</ul>
+	 	<ul>
+		    <li><button class="fortune_button" type="submit" name="login_button">LOGIN</button></li>
+	            <li><?=$failed_login?></li>
+		</ul>
+             </div>
+
+             <div id="create_account">
+		<a href="javascript:void(0);" class="fortune_button" onClick="makePopUp('create_account.php','Create Account');return false;">Create Account</a>
+	     </div>
+        </div>
+
+<?php
+} else {
+
+    /*
+     * If you're already logged in, lets show the management page.
+     *	We'll start with the SQL query then start dumping HTML
+     */
+
+    $res = pg_query($pgh,"SELECT * FROM FORTUNES");
+    if (!$res) {
+        if ($debug) { echo " :: ", pg_last_error($pgh), "<p>"; }
+    }
+    $rows = pg_num_rows($res);
+    ?>
+
+	<div class="login-auth">
+             <div class="account_text"><span class="account_header">User:</span> <?php echo $_SESSION['user']; ?><p></div><p>
+             <div class="account_text"><span class="account_header">Name:</span> <?php echo $_SESSION['name']; ?><p></div><p>
+	     <button id="fortuneShow" class="fortune_button">ADD FORTUNE</button>
+             <a class="fortune_button" href="logout.php">LOGOUT</a>
+	     </p>
+        </div>
+	<p>
+
+<?php
+}
+include 'footer.php';
