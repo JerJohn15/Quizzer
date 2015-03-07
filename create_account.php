@@ -1,11 +1,11 @@
 <?php
-include 'conf/db.php';
+include 'conf/db.conf';
 include 'header.php';
 ?>
 
     <form id="createaccount" action="insert_account.php" method="post">
         <fieldset>
-            <legend>Fortune Account Creation</legend>
+            <legend>Quizzer Account Creation</legend>
             <label for="email">
                 Email <input type="email" name="email" id="email" autofocus/>
                 <span id="email-result"></span>
@@ -29,8 +29,9 @@ include 'header.php';
                 <span id="passwd-result"></span>
             </label>
 
+	    <p/>
             <label for="role">
-                <input type="radio" name="role" value="user"/>User</input>
+                <input type="radio" name="role" value="user" checked/>User</input>
                 <input type="radio" name="role" value="admin"/>Admin</input>
             </label>
 
