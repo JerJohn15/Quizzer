@@ -73,7 +73,7 @@ if (!isset($_SESSION['user'])) {
     
 	include 'adminOption.php';
 	
-}else if($_SESSION['user'] == 'user' && isset($_SESSION['user'])){
+}else if($_SESSION['role'] == 'user' && isset($_SESSION['user'])){
 	
 	
 	include 'usersOption.php';
