@@ -4,6 +4,11 @@ include 'conf/db.conf';
 include 'header.php';
 
 $failed_login = '';
+/*
+ * @author - Jeremiah
+ *  Added conditions for redirecting users to a page to take or grade
+ *  exam depending on user role (admin or user)
+ */
 
 // If someone tries to post a login, this should allow them to login
 if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -35,13 +40,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 }
 
-// Check for an established session
+// Asks user for login information
 if (!isset($_SESSION['user'])) {
     ?>
 
        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-       <div id="login-unauth">
-
+       <link href="graphics.css" rel="stylesheet" type="text/css">
+       <div id="login-unauth" class = 'mcontents_box' class = 'register_box'>
+              <!--@author - Jeremiah added label for login and short description-->
+           
+        <h1>Login</h1>
+        <p>Enter a username and password. If first time, click 'Create Account'. </p>
              <form action="index.php" method="post" class="user_login">
                 <ul>
   		   <li><input class="login" name="user" type="email" placeholder="you@domain.com" required></li>
@@ -56,21 +65,33 @@ if (!isset($_SESSION['user'])) {
              <div id="create_account"><a href="create_account.php" target="_new">Create Account</a>
 	     </div>
         </div>
-
+<!-- @author - Jeremiah  -->
 <?php
-} else {
+} else if ($_SESSION['role'] == 'admin' && isset($_SESSION['user'])) {
+//redirects user to another page to take exam or grade it, depending
+// on if they are a user or admin
+    
+	include 'adminOption.php';
+	
+}else if($_SESSION['user'] == 'user' && isset($_SESSION['user'])){
+	
+	
+	include 'usersOption.php';
+	
+}else{
 ?>
 	<div class="login-auth">
+     <!--Shows logged in Username, Real Name, and Role-->
              <div class="account_text"><span class="account_header">User:</span> <?php echo $_SESSION['user']; ?><p></div><p>
              <div class="account_text"><span class="account_header">Name:</span> <?php echo $_SESSION['name']; ?><p></div><p>
              <div class="account_text"><span class="account_header">Role:</span> <?php echo $_SESSION['role']; ?><p></div><p>
 	     </p>
         </div>
-	<p>
-	</p>
+	
 	<a href="logout.php">Logout</a>
 	</p>	
 <?php
 }
 	include 'quiz.html';
 	include 'footer.php';
+
