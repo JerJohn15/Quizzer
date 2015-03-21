@@ -5,9 +5,10 @@ include 'header.php';
 
 $failed_login = '';
 /*
-@Jeremiah - added this comment for file description
-This file is the login page for admin/user
-*/
+ * @author - Jeremiah
+ *  Added conditions for redirecting users to a page to take or grade
+ *  exam depending on user role (admin or user)
+ */
 
 // If someone tries to post a login, this should allow them to login
 if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -38,7 +39,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     }
 
 }
-/*@Jeremiah - revised comment below*/
+
 // Asks user for login information
 if (!isset($_SESSION['user'])) {
     ?>
@@ -64,14 +65,20 @@ if (!isset($_SESSION['user'])) {
              <div id="create_account"><a href="create_account.php" target="_new">Create Account</a>
 	     </div>
         </div>
-
-<?php// shows user profile, if information is in database
-} else {
-
-    //add a condition to check if a user's role is that of an admin. If so, show user 
-    //option to redirect them to another page
-
-
+<!-- @author - Jeremiah  -->
+<?php
+} else if ($_SESSION['role'] == 'admin' && isset($_SESSION['user'])) {
+//redirects user to another page to take exam or grade it, depending
+// on if they are a user or admin
+    
+	include 'adminOption.php';
+	
+}else if($_SESSION['user'] == 'user' && isset($_SESSION['user'])){
+	
+	
+	include 'usersOption.php';
+	
+}else{
 ?>
 	<div class="login-auth">
      <!--Shows logged in Username, Real Name, and Role-->
@@ -84,6 +91,7 @@ if (!isset($_SESSION['user'])) {
 	<a href="logout.php">Logout</a>
 	</p>	
 <?php
-}//remove this to keep login and quiz on seperate pages
-//	include 'quiz.html';
+}
+	include 'quiz.html';
 	include 'footer.php';
+
