@@ -1,73 +1,61 @@
 @CHARSET "ISO-8859-1";
 
-
 /*
 Background color
 
 */
-
-
 body {
- background-color:#8080ff;
-text-align:center;
-    
+	background-color: #8080ff;
+	text-align: center;
 }
 
 /*
 Box for main content
 */
-
 div.mcontents_box {
-	background: #c0c0c0;
-	 margin-left: auto;
+	background-color: #c0c0c0; margin-left : auto;
 	margin-right: auto;
 	width: 1000px;
 	height: 1000px;
-	text-align:left;
+	text-align: left;
 	border-style: solid;
 	border-top-right-radius: 10px;
 	border-top-left-radius: 10px;
-
+	margin-left: auto;
 }
 
 /*
 Box for registation page
 */
-
-div.register_box{
+div.register_box {
 	width: 700px;
-	 border-radius: 25px;
-	 margin-left: 80px;
+	border-radius: 25px;
+	margin-left: 80px;
 	background-color: gray;
-	 box-shadow: 10px 10px 5px black;
-	 text-align: center;
+	box-shadow: 10px 10px 5px black;
+	text-align: center;
 }
 
 /*
 Default text color and font
 */
-h1{
-	text-align:center;
-	color:black;
+h1 {
+	text-align: center;
+	color: black;
 }
 
 /*
 Paragraph text style, and formatting
 */
-
-p{
-	
-	font-family:  Cambria ;
-margin-left: 200px;
-	
+p {
+	font-family: Cambria;
+	margin-left: 200px;
 }
 
 /*
 formatting and color for copyright section
 */
-
-p.copyright{
-	text-align:center;
-	color:black;
+p.copyright {
+	text-align: center;
+	color: black;
 }
-
