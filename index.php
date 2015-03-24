@@ -92,6 +92,6 @@ if (!isset($_SESSION['user'])) {
 	</p>	
 <?php
 }
-	include 'quiz.html';
+	//include 'quiz.html';
 	include 'footer.php';
 

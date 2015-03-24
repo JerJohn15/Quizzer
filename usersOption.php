@@ -14,6 +14,6 @@ User here has the option to take an exam or logout-->
     </head>
     <body>
         
-        <!--Enter code to redirect user to exam page-->
+        <!--enter HTML link to redirect user to login page-->
     </body>
 </html>
