@@ -45,7 +45,6 @@ if (!isset($_SESSION['user'])) {
     ?>
 
        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-       <link href="graphics.css" rel="stylesheet" type="text/css">
        <div id="login-unauth" class = 'mcontents_box' class = 'register_box'>
               <!--@author - Jeremiah added label for login and short description-->
            
