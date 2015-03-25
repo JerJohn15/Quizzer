@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 		<script type="text/javascript">
 			var qcount = 0;
 			var acount = 0;
@@ -10,91 +11,92 @@
 				{
 					var count = 0;
 					var html = '';
+					var quizName = $("input[id=quizName]").val();
 
 					while (count < qcount)
 					{
 						var question;
 						var answer;
 						var type;
+						var points; 
+
+						points = $("input[name=point" + count + "]").val();
+						question = $("textarea[name=q" + count + "]").val();
+
 						if ($("th[name=mc" + count + "]").attr('id') == 'mc')
-						{
-							question = $("textarea[name=q" + count + "]").val();
+						{	
 							answer = $("textarea[name=choices" + count + "]").val();
 							type = $("th[name=mc" + count + "]").attr('id');
 						} 
 						else if($ ("th[name=fb" + count + "]").attr('id') == 'fb')
 						{
-							question = $("textarea[name=q" + count + "]").val();
 							answer = $("input[name=a" + count + "]").val();
 							type = $("th[name=fb" + count + "]").attr('id');
 						}
 						else if ($("th[name=tf" + count + "]").attr('id') == 'tf')
 						{
-							question = $("textarea[name=q" + count + "]").val();
 							answer = $("input[name=a" + count + "]:checked").val();
 							type = $("th[name=tf" + count + "]").attr('id');
 						}
 
-						html += (formatQuestion(question, answer, type));
+						// html += (formatQuestion(question, answer, type));
+
+		                var dataString = {
+		                	'action'	: 'set', 
+		                	'points'	: points, 
+		                	'type'		: type, 
+		                	'question'	: question, 
+		                	'answer'	: answer, 
+		                	'name'		: quizName,
+		               	};
+
+						$.ajax({
+							type: "POST",
+							url: "create_questions.php",
+							data: dataString,
+							success: function(html) {
+					      		$("#answers").html(html);	                  	
+							}
+						});
 
 						count++;
 					}
-
-					$("#answers").html(html);
 
 				});
 
 				$("#addMultiple").on("click", function(e)
 				{
-					$("#buttons").before(getMC());
+					getQuestions("mc");
 				});
 
 				$("#addFill").on("click", function(e)
 				{
-					$("#buttons").before(getFB());
+					getQuestions("fb");
 				});
 
 				$("#addTF").on("click", function(e)
 				{
-					$("#buttons").before(getTF());
+					getQuestions("tf");
 				});
 			});
 
-			function getMC()
+			function getQuestions(type)
 			{
-				var q = '';
+				var dataString = {
+					"type" 		: 	type,
+					"count"		: 	qcount,
+					"action" 	: 	"get", 
+				};
 
-				q += "<tr><th name=\"mc" + qcount + "\" id=\"mc\">Multiple Choice</th></tr>";
-				q += "<tr><td>Question: </td><td><textarea name=\"q" + qcount + "\"\"/></textarea></td></tr>";
-				q += "<tr><td>Answers: </td><td><textarea name=\"choices" + qcount + "\"></textarea></td></tr>";
-
-				qcount++;
-				return q;
-			}
-
-			function getFB()
-			{
-				var q = '';
-
-				q += "<tr><th name=\"fb" + qcount + "\" id=\"fb\">Fill in the Blank</th></tr>";
-				q += "<tr><td>Question: </td><td><textarea name=\"q" + qcount + "\"/></textarea></td></tr>";
-				q += "<tr><td>Answer: </td><td><input type=\"text\" name=\"a" + qcount + "\"></td></tr>"
-
-				qcount++;
-				return q;
-			}
-
-			function getTF()
-			{
-				var q = '';
-
-				q += "<tr><th name=\"tf" + qcount + "\" id=\"tf\">True/False</th></tr>";
-				q += "<tr><td>Question: </td><td><textarea name=\"q" + qcount + "\"\"/></textarea></td></tr>";
-				q += "<tr><td>Answer: </td><td><input type=\"radio\" name=\"a" + qcount + "\" value=\"true\">TRUE</td></tr>"
-				q += "<tr><td></td><td><input type=\"radio\" name=\"a" + qcount + "\" value=\"false\">FALSE</td></tr>"
-
-				qcount++;
-				return q;
+				$.ajax({
+					type: "POST",
+					url: "create_questions.php",
+					data: dataString,
+					success: function(html) {
+						qcount++;
+						$("#buttons").before(html);
+					}
+				});
 			}
 
 			function formatQuestion(q, a, type){
@@ -112,9 +114,7 @@
 							html += "<input type=\"radio\" name=\"a" + acount + "\" value=\"" + replaceAll(" ", "", aSplit[x]) + "\">" + replaceAll(" ", "", aSplit[x]) + "<br>"
 						}
 					}
-
 					html += "</div>"	
-
 				} 
 				else if(type == 'fb')
 				{
@@ -145,9 +145,12 @@
 	</head>
 	<body>
 		<h2>CS473 EX - Quiz</h2>
-		<!-- @author - Jeremiah, added content box with white background -->
-		<div id="answers" class = 'mcontent_box'>
+		<div id="answers">
 			<table id="table">
+				<tr>
+					<input type="text" id="quizName" placeholder="Quiz Name..." value="testQuiz">
+					<input type="hidden" name="Language" value="0">
+				</tr>
 				<tr id="buttons">
 					<td><input type="button" id="submit" value="Done"/></td>
 					<td><input type="button" id="addMultiple" value="Add Multiple Choice"/></td>
@@ -160,4 +163,3 @@
 		</div>
 	</body>
 </html>
-</p></p>
