@@ -17,7 +17,7 @@ User here has the option to take an exam or logout-->
         <!--enter HTML link to redirect user to login page-->
         
         
-          <p><a href="take_quiz.html"Take Exam</a></p>
+          <p><a href="take_quiz.html">Take Exam</a></p>
         <br>
         <br>
         <br>
