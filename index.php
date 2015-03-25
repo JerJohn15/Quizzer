@@ -42,12 +42,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 // Asks user for login information
 if (!isset($_SESSION['user'])) {
-    ?>
 
-       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-       <link href="graphics.css" rel="stylesheet" type="text/css">
+?>
        <div id="login-unauth" class = 'mcontents_box' class = 'register_box'>
-              <!--@author - Jeremiah added label for login and short description-->
            
         <h1>Login</h1>
         <p>Enter a username and password. If first time, click 'Create Account'. </p>
@@ -58,40 +55,39 @@ if (!isset($_SESSION['user'])) {
 		</ul>
 	 	<ul>
 		    <li><button class="fortune_button" type="submit" name="login_button">LOGIN</button></li>
-	            <li><?=$failed_login?></li>
+	            <?= $failed_login ?>
 		</ul>
+                <div id="create_account"><a href="create_account.php" target="_new">Create Account</a></div>
              </div>
-
-             <div id="create_account"><a href="create_account.php" target="_new">Create Account</a>
-	     </div>
         </div>
-<!-- @author - Jeremiah  -->
+
 <?php
-} else if ($_SESSION['role'] == 'admin' && isset($_SESSION['user'])) {
-//redirects user to another page to take exam or grade it, depending
-// on if they are a user or admin
-    
-	include 'adminOption.php';
-	
-}else if($_SESSION['role'] == 'user' && isset($_SESSION['user'])){
-	
-	
-	include 'usersOption.php';
-	
-}else{
-?>
-	<div class="login-auth">
-     <!--Shows logged in Username, Real Name, and Role-->
+
+} else {
+
+       ?>
+       <div class="login-auth">
+       <!--Shows logged in Username, Real Name, and Role-->
              <div class="account_text"><span class="account_header">User:</span> <?php echo $_SESSION['user']; ?><p></div><p>
              <div class="account_text"><span class="account_header">Name:</span> <?php echo $_SESSION['name']; ?><p></div><p>
              <div class="account_text"><span class="account_header">Role:</span> <?php echo $_SESSION['role']; ?><p></div><p>
-	     </p>
+             </p>
         </div>
-	
-	<a href="logout.php">Logout</a>
-	</p>	
-<?php
-}
-	//include 'quiz.html';
-	include 'footer.php';
 
+        <a href="logout.php">Logout</a>
+        </p>
+
+<?php
+
+     if ($_SESSION['role'] == 'admin') {
+	include 'adminOption.php';
+     } 
+     if($_SESSION['role'] == 'user'){
+	include 'take_quiz.php';
+     }
+}
+
+//include 'quiz.html';
+include 'footer.php';
+
+?>
