@@ -69,12 +69,12 @@ if (!isset($_SESSION['user'])) {
 } else if ($_SESSION['role'] == 'admin' && isset($_SESSION['user'])) {
 //redirects user to another page to take exam or grade it, depending
 // on if they are a user or admin
-    
+	include 'header.php';
 	include 'adminOption.php';
 	
 }else if($_SESSION['role'] == 'user' && isset($_SESSION['user'])){
 	
-	
+	include 'header.php';
 	include 'usersOption.php';
 	
 }else{
