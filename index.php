@@ -51,7 +51,7 @@ if (! isset ( $_SESSION ['user'] )) {
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	
 	<div id="login-unauth" class='mcontents_box'>
-	<div class='register_box'>
+	<div  id="login-unauth" class='register_box'>
 		<!--@author - Jeremiah added label for login and short description-->
 
 		<h1>Login</h1>
