@@ -67,12 +67,12 @@ if (! isset ( $_SESSION ['user'] )) {
 			<ul>
 				<li><button class="fortune_button" type="submit" name="login_button">LOGIN</button></li>
 				<li><?=$failed_login?></li>
-			</ul>
-			<div id="create_account">
+			</ul>	
+	</div>
+	<div id="create_account">
 				<a href="create_account.php" target="_new">Create Account</a>
 			</div>
 	
-	</div>
 	</div>
 
 <!-- @author - Jeremiah  -->
