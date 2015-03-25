@@ -28,7 +28,7 @@ div.mcontents_box {
 Box for registation page
 */
 div.register_box {
-	width: 700px;
+	width:300px;
 	border-radius: 25px;
 	margin-left: 80px;
 	background-color: gray;
