@@ -49,8 +49,9 @@ if (! isset ( $_SESSION ['user'] )) {
 
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<div class='register_box'>
+	
 	<div id="login-unauth" class='mcontents_box'>
+	<div class='register_box'>
 		<!--@author - Jeremiah added label for login and short description-->
 
 		<h1>Login</h1>
@@ -67,11 +68,12 @@ if (! isset ( $_SESSION ['user'] )) {
 				<li><button class="fortune_button" type="submit" name="login_button">LOGIN</button></li>
 				<li><?=$failed_login?></li>
 			</ul>
-	<div id="create_account">
-		<a href="create_account.php" target="_new">Create Account</a>
+			<div id="create_account">
+				<a href="create_account.php" target="_new">Create Account</a>
+			</div>
+	
 	</div>
-	</div>	
-</div>
+	</div>
 
 <!-- @author - Jeremiah  -->
 <?php
