@@ -75,9 +75,8 @@ if (!isset($_SESSION['user'])) {
              <div class="account_text"><span class="account_header">Role</span></div><p>
              <div class="account_text"><?php echo $_SESSION['role']; ?><p></div><p>
              </p>
+             <a href="logout.php">Logout</a>
         </div>
-
-        <a href="logout.php">Logout</a>
         </p>
 
 <?php
