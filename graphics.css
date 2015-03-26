@@ -41,12 +41,7 @@ div.register_box{
 
 	
 }
-/*
-Centered text
-*/
-div.create_quiz{
-	text-align:center;
-}
+
 
 /*
 Default text color and font
@@ -65,10 +60,3 @@ p {
 	margin-left: 200px;
 }
 
-/*
-formatting and color for copyright section
-*/
-p.copyright {
-	text-align: center;
-	color: black;
-}
