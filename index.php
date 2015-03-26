@@ -57,7 +57,7 @@ if (!isset($_SESSION['user'])) {
 		    <li><button class="fortune_button" type="submit" name="login_button">LOGIN</button></li>
 	            <?= $failed_login ?>
 		</ul>
-                <div id="create_account"><a href="create_account.php" target="_new">Create Account</a></div>
+                <div id="create_account"><a href="#" target="newaccount" onclick="window.open('../create_account.php','name','width=600,height=400')">Create Account</a></div>
              </div>
         </div>
 
@@ -67,10 +67,13 @@ if (!isset($_SESSION['user'])) {
 
        ?>
        <div class="login-auth">
-       <!--Shows logged in Username, Real Name, and Role-->
-             <div class="account_text"><span class="account_header">User:</span> <?php echo $_SESSION['user']; ?><p></div><p>
-             <div class="account_text"><span class="account_header">Name:</span> <?php echo $_SESSION['name']; ?><p></div><p>
-             <div class="account_text"><span class="account_header">Role:</span> <?php echo $_SESSION['role']; ?><p></div><p>
+	     <img src="img/bu-logo.gif"><p>
+             <div class="account_text"><span class="account_header">Account Info</span></div><p>
+             <div class="account_text"><?php echo $_SESSION['user']; ?><p></div><p>
+             <div class="account_text"><?php echo $_SESSION['name']; ?><p></div><p>
+
+             <div class="account_text"><span class="account_header">Role</span></div><p>
+             <div class="account_text"><?php echo $_SESSION['role']; ?><p></div><p>
              </p>
         </div>
 
