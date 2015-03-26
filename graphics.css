@@ -5,7 +5,7 @@ Background color
 
 */
 body {
-	background-color: #8080ff;
+	background-color: #ffffff;
 	text-align: center;
 }
 
@@ -63,6 +63,82 @@ p {
 formatting and color for copyright section
 */
 p.copyright {
-	text-align: center;
+	text-align: left;
 	color: black;
 }
+
+.login-auth {
+    left: 0;
+    top: 0;
+    padding-top: 50px;
+    padding-left: 20px;
+    width: 15%;
+    height: 100%;
+    position: absolute;
+    background: lightgray;
+}
+
+.account_header {
+    text-align: left;
+    font:italic bold 12px/30px Georgia, serif;
+    font-size: 1.5em
+}
+
+.account_text {
+    text-align: left;
+    font:12px/30px Georgia, serif;
+}
+
+#create_account {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 30px;
+}
+
+.account_created {
+    font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding: 10px;
+    text-align: center;
+}
+
+.user_login {
+    top: 0;
+    left: 0;
+    padding-bottom: 75px;
+}
+
+.user_login ul {
+   padding: 0;
+}
+
+.user_login li {
+   display: inline;
+   float: left;
+}
+
+.login {
+   border-radius: 10px;
+   height: 28px;
+}
+
+.account_created {
+    font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding: 10px;
+    text-align: center;
+}
+
+.failed_login {
+    color: red;
+    font-family: arial, helvetica, sans-serif;
+    font-size: .75em;
+    position: absolute;
+    padding-left: 15px;
+    -webkit-animation-name: fail;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 2;
+}
+
+

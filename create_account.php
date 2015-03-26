@@ -80,4 +80,3 @@ include 'header.php';
         });
     </script>
 
-<?php include 'footer.php'; ?>
