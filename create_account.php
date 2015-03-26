@@ -6,7 +6,7 @@ include 'header.php';
 <!-- @author - Jeremiah  
 		Added reg boxs
 -->
-	<div class = 'register_box'>
+	<div class = "register_box">   
     <form id="createaccount" action="insert_account.php" method="post">
         <fieldset>
             <legend>Quizzer Account Creation</legend>
@@ -44,7 +44,7 @@ include 'header.php';
             <button class="fortune_button" type="submit" name="login_button">CREATE</button>
         </fieldset>
     </form>
-    </div>
+</div>
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>

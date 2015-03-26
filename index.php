@@ -43,22 +43,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 // Asks user for login information
 if (!isset($_SESSION['user'])) {
 
-?>
-       <div id="login-unauth" class = 'mcontents_box' class = 'register_box'>
+?><!-- @author Jeremiah - Added login box here-->	
+<div class = "login_box">
+       <div id="login-unauth" class = 'mcontents_box' >
            
         <h1>Login</h1>
         <p>Enter a username and password. If first time, click 'Create Account'. </p>
              <form action="index.php" method="post" class="user_login">
                 <ul>
-  		   <li><input class="login" name="user" type="email" placeholder="you@domain.com" required></li>
-		   <li><input class="login" name="passwd" type="password" placeholder="password" required></li>
+  		   <input class="login" name="user" type="email" placeholder="you@domain.com" required></li>
+		   <input class="login" name="passwd" type="password" placeholder="password" required></li>
 		</ul>
 	 	<ul>
-		    <li><button class="fortune_button" type="submit" name="login_button">LOGIN</button></li>
+		    <button class="fortune_button" type="submit" name="login_button">LOGIN</button>
 	            <?= $failed_login ?>
 		</ul>
                 <div id="create_account"><a href="create_account.php" target="_new">Create Account</a></div>
              </div>
+        </div>
         </div>
 
 <?php
@@ -87,7 +89,6 @@ if (!isset($_SESSION['user'])) {
      }
 }
 
-//include 'quiz.html';
 include 'footer.php';
 
 ?>

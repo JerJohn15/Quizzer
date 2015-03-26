@@ -25,22 +25,27 @@ div.mcontents_box {
 }
 
 /*
-Box for registation page
+Box for logging in 
 */
-div.register_box {
-	width:300px;
-	border-radius: 25px;
+div.login_box {
 	margin-left: 80px;
-	background-color: gray;
-	box-shadow: 10px 10px 5px black;
 	text-align: center;
 }
 /*
-Box for logging in 
+Box for registation page
 
 */
-div.login_box{
+div.register_box{
+	background-color: #c0c0c0;
+	text-align: center;
+
 	
+}
+/*
+Centered text
+*/
+div.create_quiz{
+	text-align:center;
 }
 
 /*
@@ -55,6 +60,7 @@ h1 {
 Paragraph text style, and formatting
 */
 p {
+	text-align: center;
 	font-family: Cambria;
 	margin-left: 200px;
 }
