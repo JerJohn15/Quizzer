@@ -153,8 +153,3 @@ for($x = 0; $x < count($resultArray); $x++) {
 	}
 </script>
 
-
-
-<?php
-include 'footer.php';
-?>
