@@ -48,92 +48,43 @@ for($x = 0; $x < count($resultArray); $x++) {
 
 	function checkAnswers(){
 		var counter = 0; 
-		var dataString = {};
+		var jsonObj = "";
 
 
 		$("font").remove();
 
-		while(true){
-			var qid = 0; 
+		jsonObj += "{\n";
 
+		while(true){
 
 			if ($("h4[name=mc" + counter + "]").attr('id') == 'mc')
 			{	
 				qid = $("h4[name=mc" + counter + "]").attr('qid');
 				value = $("input[name=a" + counter + "]:checked").val();
-				if(value==null)
-				{
-					// $("h4[name=mc" + counter + "]").prepend("<font color=\"red\">INCORRECT </font>");
-					alert("FALSE");
-				}
-				else
-				{
-					if(value.substring(value.length-1) == "*"){
-						// $("h4[name=mc" + counter + "]").prepend("<font color=\"green\">CORRECT </font>");
-						alert("TRUE");
-					}else{
-						// $("h4[name=mc" + counter + "]").prepend("<font color=\"red\">INCORRECT </font>");
-						// dataString[qid] = 'FALSE';
-						alert("FALSE");
-					}
+
+				if(value == null){
+					value = "";
 				}
 
+				jsonObj += "\"" + counter + "\" : { \"type\" : \"mc\", \"value\" : \"" + value + "\", \"qid\" : \"" + qid + "\" },\n";
 			} 
 			else if($ ("h4[name=fb" + counter + "]").attr('id') == 'fb')
 			{
 				qid = $("h4[name=fb" + counter + "]").attr('qid');
 				value = $("input[name=a" + counter + "]").val();
-				if(value=="")
-				{
-					// $("h4[name=fb" + counter + "]").prepend("<font color=\"red\">INCORRECT </font>");
-					alert("FALSE");
-				}
-				else
-				{
-					$.ajax({
-						type: "POST",
-						url: "check_answers.php",
-						data: { 'qid' : qid, 'value' : value, 'type' : 'fb'},
-						success: function(html) {
-							alert(html);
-							// if(html == "TRUE"){
-							// 	dataString[qid] = 'TRUE';
-							// 	$("h4[name=fb" + counter + "]").prepend("<font color=\"green\">CORRECT </font>");
-							// }else{
-							// 	$("h4[name=fb" + counter + "]").prepend("<font color=\"red\">INCORRECT </font>");
-							// 	dataString[qid] = 'FALSE';
-							// }
-						}
-					});
-				}
+
+				jsonObj += "\"" + counter + "\" : { \"type\" : \"fb\", \"value\" : \"" + value + "\", \"qid\" : \"" + qid + "\" },\n";
 			}
 			else if ($("h4[name=tf" + counter + "]").attr('id') == 'tf')
 			{
 				qid = $("h4[name=tf" + counter + "]").attr('qid');
 				value = $("input[name=a" + counter + "]:checked").val();
-				if(value==null)
-				{
-					// $("h4[name=tf" + counter + "]").prepend("<font color=\"red\">INCORRECT </font>");
-					alert("FALSE");
+
+				if(value == null){
+					value = "";
 				}
-				else
-				{
-					$.ajax({
-						type: "POST",
-						url: "check_answers.php",
-						data: { 'qid' : qid, 'value' : value, 'type' : 'tf'},
-						success: function(html) {
-							alert(html);
-							// if(html == "TRUE"){
-							// 	dataString[qid] = 'TRUE';
-							// 	$("h4[name=fb" + counter + "]").prepend("<font color=\"green\">CORRECT </font>");
-							// }else{
-							// 	$("h4[name=fb" + counter + "]").prepend("<font color=\"red\">INCORRECT </font>");
-							// 	dataString[qid] = 'FALSE';
-							// }
-						}
-					});
-				}
+
+				jsonObj += "\"" + counter + "\" : { \"type\" : \"tf\", \"value\" : \"" + value + "\", \"qid\" : \"" + qid + "\" },\n";
 			}
 			else
 			{
@@ -142,14 +93,39 @@ for($x = 0; $x < count($resultArray); $x++) {
 			counter++;
 		}
 
-		// $.ajax({
-		// 	type: "POST",
-		// 	url: "check_answers.php",
-		// 	data: dataString,
-		// 	success: function(html) {
-		// 		$("#quiz").html(html);
-		// 	}
-		// });
+		jsonObj += "}";
+
+		jsonObj = jsonObj.replace(",\n}","\n}");
+		
+		$.ajax({
+			type: "POST",
+			url: "check_answers.php",
+			data: { 'data' : jsonObj },
+			dataType: 'json',
+			success: function(html) {
+				for (var key in html) {
+					if(html[key] == 'true'){
+						$("h4[qid=" + key + "]").prepend("<font color=\"green\">CORRECT  </font>");
+					}else if (html[key] == 'false'){
+						$("h4[qid=" + key + "]").prepend("<font color=\"red\">INCORRECT  </font>");
+					}else if (key == 'score'){
+						$("#score").html(html[key]);
+					}else{
+						alert(html[key]);
+					}
+				}
+				$("#submit").remove();
+				$("#quiz").append("<input type=\"submit\" value=\"Continue\" id=\"cont\">");
+
+				$("#cont").on("click", function(event){
+					window.location.replace("index.php");
+				});
+			},
+		    error: function (xhr, ajaxOptions, thrownError) {
+		        alert(xhr.status);
+		        alert(thrownError);
+		    }
+		});
 	}
 </script>
 

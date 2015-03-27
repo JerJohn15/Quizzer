@@ -39,8 +39,6 @@
 							type = $("th[name=tf" + count + "]").attr('id');
 						}
 
-						// html += (formatQuestion(question, answer, type));
-
 		                var dataString = {
 		                	'action'	: 'set', 
 		                	'points'	: points, 
@@ -97,45 +95,6 @@
 						$("#buttons").before(html);
 					}
 				});
-			}
-
-			function formatQuestion(q, a, type){
-				html = '';
-
-				if (type == 'mc')
-				{
-					html += "<div>"
-					html +=	"<h4 name=\"mc" + acount + "\" id=\"mc\">" + q + "</h4>"
-					
-					aSplit = a.split("\n");	
-					for(var x in aSplit){
-						console.log(aSplit[x]);
-						if (replaceAll(" ", "", aSplit[x]) != ""){
-							html += "<input type=\"radio\" name=\"a" + acount + "\" value=\"" + replaceAll(" ", "", aSplit[x]) + "\">" + replaceAll(" ", "", aSplit[x]) + "<br>"
-						}
-					}
-					html += "</div>"	
-				} 
-				else if(type == 'fb')
-				{
-
-					html += "<div>"
-					html +=	"<h4 name=\"fb" + acount + "\" id=\"fb\">" + replaceAll("_", "<input type=\"text\" name=\"a" + qcount + "\">", q); + "</h4>"
-					html += "</div>"
-				}
-				else if (type == 'tf')
-				{
-					html += "<div>"
-					html +=	"<h4 name=\"mc" + acount + "\" id=\"mc\">" + q + "</h4>"
-					html += "<input type=\"radio\" name=\"a" + qcount + "\" value=\"true\">TRUE"
-					html += "<br>"
-					html += "<input type=\"radio\" name=\"a" + qcount + "\" value=\"false\">FALSE"
-					html += "</div>"
-				}
-
-				acount++;
-				console.log(html);
-				return html;
 			}
 
 			function replaceAll(find, replace, str) {
